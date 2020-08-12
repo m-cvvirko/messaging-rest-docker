@@ -1,6 +1,7 @@
 package pl.marek.messaging.consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,15 +22,16 @@ public class ApiController {
     }
 
     @PostMapping(value = "/consumer", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> process(@RequestBody Map<String, Object> clients) {
-        String response = payloadServices.process(clients);
+    public ResponseEntity<Map<String, Object>> process(@RequestBody Map<String, Object> jsonClients) {
+        Map<String, Object> response = payloadServices.process(jsonClients);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/consumer")
                 .buildAndExpand()
                 .toUri();
 
         return ResponseEntity.created(uri)
-                .body(clients);
+                .body(response);
     }
 }

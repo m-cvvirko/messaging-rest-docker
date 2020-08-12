@@ -1,24 +1,41 @@
 package pl.marek.messaging.consumer;
 
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
-import org.springframework.stereotype.Repository;
-import pl.marek.messaging.consumer.model.json.Clients;
+import pl.marek.messaging.consumer.model.domain.Client;
 
-import java.sql.Date;
 import java.util.List;
 
-@RepositoryRestResource(exported = false)
-@Repository
-public interface PayloadRepository extends CrudRepository<Clients, Integer> {
+public interface PayloadRepository extends CrudRepository<Client, String> {
 
-    //Not exposed by Spring Data REST
+    @Query(value = "{'client' : ?0 }",
+            fields = "{ 'id':1, 'title':1, 'name':1, 'surname':1}")
+    List<Client> findByClientInfoNameAndSurname(@Param("name") String name, @Param("surname") String surname);
+
     @Override
     @RestResource(exported = false)
-    <S extends Clients> S save(S s);
+    <S extends Client> S save(S s);
 
-    //@Override
+    @Override
     @RestResource(exported = false)
-    List<Clients> findByDate(Date date);
+    <S extends Client> Iterable<S> saveAll(Iterable<S> iterable);
+
+    @Override
+    @RestResource(exported = false)
+    void deleteById(String string);
+
+    @Override
+    @RestResource(exported = false)
+    void delete(Client client);
+
+    @Override
+    @RestResource(exported = false)
+    void deleteAll(Iterable<? extends Client> iterable);
+
+    @Override
+    @RestResource(exported = false)
+    void deleteAll();
+
 }

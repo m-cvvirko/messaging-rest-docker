@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PayloadConsumerApplication {
+public class PayloadConsumerWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PayloadConsumerApplication.class, args);
+		SpringApplication.run(PayloadConsumerWebApplication.class, args);
 	}
 }
