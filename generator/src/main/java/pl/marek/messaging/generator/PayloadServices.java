@@ -1,4 +1,4 @@
-package generator;
+package pl.marek.messaging.generator;
 
 import org.springframework.stereotype.Service;
 

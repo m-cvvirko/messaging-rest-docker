@@ -1,12 +1,12 @@
-package producer;
+package pl.marek.messaging.consumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PayloadProducerWebApplication {
+public class PayloadConsumerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PayloadProducerWebApplication.class, args);
+		SpringApplication.run(PayloadConsumerApplication.class, args);
 	}
 }

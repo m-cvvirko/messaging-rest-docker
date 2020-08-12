@@ -1,4 +1,4 @@
-package json;
+package pl.marek.messaging.consumer.model.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

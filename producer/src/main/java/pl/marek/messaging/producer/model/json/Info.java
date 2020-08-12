@@ -1,4 +1,4 @@
-package json;
+package pl.marek.messaging.producer.model.json;
 
 import org.json.simple.JSONObject;
 

@@ -1,4 +1,4 @@
-package generator;
+package pl.marek.messaging.generator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

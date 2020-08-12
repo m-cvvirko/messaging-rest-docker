@@ -37,10 +37,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!--		<dependency>-->
-        <!--			<groupId>org.springframework.boot</groupId>-->
-        <!--			<artifactId>spring-boot-starter-data-mongodb</artifactId>-->
-        <!--		</dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
@@ -110,6 +107,7 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
+            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -117,10 +115,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <!-- https://mvnrepository.com/artifact/org.pl.marek.messaging.producer.model.json/pl.marek.messaging.producer.model.json -->
         <!--		<dependency>-->
-        <!--			<groupId>org.json</groupId>-->
-        <!--			<artifactId>json</artifactId>-->
+        <!--			<groupId>org.pl.marek.messaging.producer.model.json</groupId>-->
+        <!--			<artifactId>pl.marek.messaging.producer.model.json</artifactId>-->
         <!--			<version>20200518</version>-->
         <!--		</dependency>-->
         <dependency>

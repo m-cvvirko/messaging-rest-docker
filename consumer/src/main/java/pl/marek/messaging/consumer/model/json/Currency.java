@@ -1,4 +1,4 @@
-package json;
+package pl.marek.messaging.consumer.model.json;
 
 public enum Currency {
     PLN, UNKNOWN;

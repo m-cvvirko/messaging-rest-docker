@@ -1,7 +1,7 @@
-package producer;
+package pl.marek.messaging.producer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import json.Clients;
+import pl.marek.messaging.producer.model.json.Clients;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -25,7 +25,7 @@ public class PayloadPrimer implements CommandLineRunner {
     @Value("${messaging.app.generator.url}")
     private String urlOfGenerator;
 
-    @Value("${messaging.app.consumer.url}")
+    @Value("${messaging.app.pl.marek.messaging.consumer.url}")
     private String urlOfClient;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PayloadPrimer.class);
@@ -72,7 +72,7 @@ public class PayloadPrimer implements CommandLineRunner {
         String json = readJson(url);
         LOGGER.info(json);
         try {
-            // check if source with json is OK
+            // check if source with pl.marek.messaging.producer.model.json is OK
             parseJson(json);
         } catch (ParseException e) {
             LOGGER.error("Wrong JSON format {}", json);

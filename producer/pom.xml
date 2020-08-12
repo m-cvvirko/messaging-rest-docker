@@ -13,6 +13,6 @@
     <artifactId>producer</artifactId>
     <groupId>pl.marek.messaging</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>messaging producer</name>
-    <description>messaging producer</description>
+    <name>messaging pl.marek.messaging.producer</name>
+    <description>messaging pl.marek.messaging.producer</description>
 </project>

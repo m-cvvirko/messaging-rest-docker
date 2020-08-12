@@ -1,4 +1,4 @@
-package json;
+package pl.marek.messaging.producer.model.json;
 
 public enum TransactionType {
     INCOME("income"), OUTCOME("outcome"), UNKNOWN("unknown");
