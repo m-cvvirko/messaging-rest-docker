@@ -18,7 +18,7 @@ public class ApiController {
         this.payloadServices = payloadServices;
     }
 
-    @GetMapping("/generator-payloads")
+    @GetMapping("/generator")
     @ResponseBody
     public String getClientPayloads(){
         return this.payloadServices.getClientPayloadsTemplate();

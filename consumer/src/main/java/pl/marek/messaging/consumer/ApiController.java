@@ -20,12 +20,12 @@ public class ApiController {
         this.payloadServices = payloadServices;
     }
 
-    @PostMapping(path = "/consumer")
+    @PostMapping(value = "/consumer", consumes = "application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<Clients> processPayloads(@RequestBody Clients clients) {
         String response = payloadServices.process(clients);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/consumer-payloads")
+                .path("/consumer")
                 .buildAndExpand()
                 .toUri();
 

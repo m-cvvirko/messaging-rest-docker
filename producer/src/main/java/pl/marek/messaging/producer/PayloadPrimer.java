@@ -42,14 +42,15 @@ public class PayloadPrimer implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         String json = fetchRequestToSend();
-        String response = sendToConsumer(json);
-        LOGGER.info("Response: {}", response);
+//        String response = sendToConsumer(json);
+//        LOGGER.info("Response: {}", response);
         System.exit(SpringApplication.exit(context));
     }
 
     private String sendToConsumer(String json) throws IOException {
         URL url = new URL(urlOfConsumer);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestProperty("Content-Type", "application/json; utf-8");
         conn.setRequestMethod("POST");
         conn.setRequestProperty("data", json);
         conn.connect();
@@ -63,6 +64,7 @@ public class PayloadPrimer implements CommandLineRunner {
     private String fetchRequestToSend() throws IOException, ParseException {
         URL url = new URL(urlOfGenerator);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestProperty("Accept", "application/json");
         conn.setRequestMethod("GET");
         conn.connect();
         int responsecode = conn.getResponseCode();
