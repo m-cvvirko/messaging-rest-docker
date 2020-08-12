@@ -60,7 +60,7 @@ public class PayloadPrimer implements CommandLineRunner {
         return readJson(url);
     }
 
-    private String fetchRequestToSend() throws IOException {
+    private String fetchRequestToSend() throws IOException, ParseException {
         URL url = new URL(urlOfGenerator);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
@@ -76,7 +76,7 @@ public class PayloadPrimer implements CommandLineRunner {
             parseJson(json);
         } catch (ParseException e) {
             LOGGER.error("Wrong JSON format {}", json);
-            throw new ParseException("Wrong JSON format");
+            throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
         }
         return json;
     }
