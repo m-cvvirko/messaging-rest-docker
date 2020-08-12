@@ -14,9 +14,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 @Component
@@ -25,7 +29,7 @@ public class PayloadPrimer implements CommandLineRunner {
     @Value("${messaging.app.generator.url}")
     private String urlOfGenerator;
 
-    @Value("${messaging.app.pl.marek.messaging.consumer.url}")
+    @Value("${messaging.app.consumer.url}")
     private String urlOfConsumer;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PayloadPrimer.class);
@@ -42,23 +46,35 @@ public class PayloadPrimer implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         String json = fetchRequestToSend();
-//        String response = sendToConsumer(json);
-//        LOGGER.info("Response: {}", response);
+        String response = sendToConsumer(json);
+        LOGGER.info(">>> Response: {}", response);
         System.exit(SpringApplication.exit(context));
     }
 
+    // https://stackoverflow.com/questions/21404252/post-request-send-json-data-java-httpurlconnection
     private String sendToConsumer(String json) throws IOException {
         URL url = new URL(urlOfConsumer);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/json; utf-8");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(5000);
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
         conn.setRequestMethod("POST");
         conn.setRequestProperty("data", json);
-        conn.connect();
-        int responsecode = conn.getResponseCode();
-        if(responsecode != 200) {
-            throw new RuntimeException("HttpResponseCode: " + responsecode);
-        }
-        return readJson(url);
+
+        OutputStream os = conn.getOutputStream();
+        os.write(json.getBytes(StandardCharsets.UTF_8));
+        os.close();
+
+        // read the response
+        InputStream in = new BufferedInputStream(conn.getInputStream());
+        String result = org.apache.commons.io.IOUtils.toString(in, StandardCharsets.UTF_8);
+//        JSONObject jsonObject = new JSONObject(result);
+
+        in.close();
+        conn.disconnect();
+
+        return result;
     }
 
     private String fetchRequestToSend() throws IOException, ParseException {
