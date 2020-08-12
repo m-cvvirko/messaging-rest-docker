@@ -26,7 +26,7 @@ public class PayloadPrimer implements CommandLineRunner {
     private String urlOfGenerator;
 
     @Value("${messaging.app.pl.marek.messaging.consumer.url}")
-    private String urlOfClient;
+    private String urlOfConsumer;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PayloadPrimer.class);
 
@@ -42,13 +42,13 @@ public class PayloadPrimer implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         String json = fetchRequestToSend();
-        String response = sendToClient(json);
+        String response = sendToConsumer(json);
         LOGGER.info("Response: {}", response);
         System.exit(SpringApplication.exit(context));
     }
 
-    private String sendToClient(String json) throws IOException {
-        URL url = new URL(urlOfClient);
+    private String sendToConsumer(String json) throws IOException {
+        URL url = new URL(urlOfConsumer);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("data", json);

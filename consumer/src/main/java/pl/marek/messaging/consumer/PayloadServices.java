@@ -1,19 +1,21 @@
 package pl.marek.messaging.consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.marek.messaging.consumer.model.json.Clients;
 
+@Service
 public class PayloadServices {
 
-    private final PayloadRepository repository;
+//    private final PayloadRepository repository;
 
-    @Autowired
-    PayloadServices(PayloadRepository repository) {
-        this.repository = repository;
-    }
+//    @Autowired
+//    PayloadServices(PayloadRepository repository) {
+//        this.repository = repository;
+//    }
 
     public String process(Clients clients) {
-        repository.save(clients);
+        //repository.save(clients);
         return computeResponse(clients);
     }
 

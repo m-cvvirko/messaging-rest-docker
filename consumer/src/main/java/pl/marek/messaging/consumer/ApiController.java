@@ -20,7 +20,7 @@ public class ApiController {
         this.payloadServices = payloadServices;
     }
 
-    @PostMapping(path = "/consumer-payloads")
+    @PostMapping(path = "/consumer")
     @ResponseBody
     public ResponseEntity<Clients> processPayloads(@RequestBody Clients clients) {
         String response = payloadServices.process(clients);

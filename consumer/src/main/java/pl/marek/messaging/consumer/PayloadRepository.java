@@ -3,12 +3,14 @@ package pl.marek.messaging.consumer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.stereotype.Repository;
 import pl.marek.messaging.consumer.model.json.Clients;
 
 import java.sql.Date;
 import java.util.List;
 
 @RepositoryRestResource(exported = false)
+@Repository
 public interface PayloadRepository extends CrudRepository<Clients, Integer> {
 
     //Not exposed by Spring Data REST
