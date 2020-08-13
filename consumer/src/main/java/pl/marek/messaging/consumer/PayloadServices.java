@@ -29,7 +29,7 @@ public class PayloadServices {
         Client client = new Client(clientInfo, clientBalance, clientTransactions);
         repository.save(client);
         List<Client> response = computeResponse(clientInfo);
-        return new HashMap<String, Object>();
+        return clientBalance;
     }
 
     private List<Client> computeResponse(Map<String, Object> client) {
