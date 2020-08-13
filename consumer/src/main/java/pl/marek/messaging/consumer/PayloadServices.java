@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.marek.messaging.consumer.model.domain.Client;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -26,15 +28,17 @@ public class PayloadServices {
         Map<String, Object> clientTransactions = (Map<String, Object>)jsonObjClient.get("transactions");
         Client client = new Client(clientInfo, clientBalance, clientTransactions);
         repository.save(client);
-        return computeResponse(clientInfo);
+        List<Client> response = computeResponse(clientInfo);
+        return new HashMap<String, Object>();
     }
 
-    private Map<String, Object> computeResponse(Map<String, Object> client) {
+    private List<Client> computeResponse(Map<String, Object> client) {
         Map<String, Object> info = (Map<String, Object>)client.get("info");
         String name = (String)info.get("name");
         String surname = (String)info.get("surname");
-        return repository.findByClientInfoNameAndSurname(name, surname).orElseThrow(() ->
-                new NoSuchElementException("client("
-                        + name + " " + surname));
+        return repository.findByClientInfoNameAndSurname(name, surname);
+//                .orElseThrow(() ->
+//                new NoSuchElementException("client("
+//                        + name + " " + surname));
     }
 }
