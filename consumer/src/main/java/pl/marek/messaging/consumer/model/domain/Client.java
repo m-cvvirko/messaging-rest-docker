@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,12 +19,12 @@ public class Client {
     private Map<String, Object> balance;
 
     @Indexed
-    private Map<String, Object> transactions;
+    private List<Object> transactions;
 
 
     public Client(Map<String, Object> info,
                   Map<String, Object> balance,
-                  Map<String, Object> transactions) {
+                  List<Object> transactions) {
         this.info = info;
         this.balance = balance;
         this.transactions = transactions;
@@ -44,7 +45,7 @@ public class Client {
         return balance;
     }
 
-    public Map<String, Object> getTransactions() {
+    public List<Object> getTransactions() {
         return transactions;
     }
 

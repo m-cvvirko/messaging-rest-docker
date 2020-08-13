@@ -12,7 +12,19 @@ public interface PayloadRepository extends CrudRepository<Client, String> {
 
     @Query(value = "{'client' : ?0 }",
             fields = "{ 'id':1, 'title':1, 'name':1, 'surname':1}")
-    List<Client> findByClientInfoNameAndSurname(@Param("name") String name, @Param("surname") String surname);
+    List<Client> findBalanceByClientInfoNameAndSurnameOfToday(@Param("name") String name, @Param("surname") String surname);
+
+    @Query(value = "{'client' : ?0 }",
+            fields = "{ 'id':1, 'title':1, 'name':1, 'surname':1}")
+    List<Client> findTurnoverOnAccountsByClientInfoNameAndSurnameOfToday(@Param("name") String name, @Param("surname") String surname);
+
+    @Query(value = "{'client' : ?0 }",
+            fields = "{ 'id':1, 'title':1, 'name':1, 'surname':1}")
+    List<Client> findIncomesByClientInfoNameAndSurnameOfToday(@Param("name") String name, @Param("surname") String surname);
+
+    @Query(value = "{'client' : ?0 }",
+            fields = "{ 'id':1, 'title':1, 'name':1, 'surname':1}")
+    List<Client> findExpendituresByClientInfoNameAndSurnameOfToday(@Param("name") String name, @Param("surname") String surname);
 
     @Override
     @RestResource(exported = false)
